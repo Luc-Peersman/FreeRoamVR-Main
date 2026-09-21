@@ -51,3 +51,16 @@ Wat je **niet** hoeft aan te passen (en beter met rust laat): scripts, de XR-rig
    om opgehaald te worden.
 
 Je hoeft zelf niets te mergen; dat gebeurt centraal.
+
+### Extra: exporteer ook een .unitypackage
+
+Naast pushen naar git, graag ook je werk exporteren als los `.unitypackage`-bestand — dat maakt
+het voor de technicus die alles samenvoegt een stuk betrouwbaarder dan zelf door je project
+zoeken:
+
+1. Selecteer je root-GameObject in de Hierarchy (`ImmersiveRoom_SLIX` of hoe je 'm hernoemd hebt).
+2. Rechtermuisknop → **Export Package...**
+3. Laat **Include Dependencies** aangevinkt — zo komen je modellen, textures en audio automatisch
+   mee, je hoeft niks apart te verzamelen.
+4. Sla op als `Export/Content_<jouw-naam>.unitypackage` (maak de map `Export/` aan als die er nog
+   niet is) en commit dat bestand mee in je branch.
