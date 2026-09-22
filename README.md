@@ -124,13 +124,27 @@ niets te mergen.
 
 Dit maakt het voor de technicus een stuk betrouwbaarder dan zelf door jouw project zoeken:
 
-1. Ga in Unity naar het **Hierarchy**-paneel en klik je root-GameObject aan (`ImmersiveRoom_SLIX`
-   of hoe je 'm hernoemd hebt).
-2. Rechtermuisknop erop → **Export Package...**
-3. Laat het vinkje bij **"Include Dependencies"** aan staan — zo komen je modellen, textures en
+> **Let op:** de exportoptie (in oudere Unity-tutorials vaak "Export Package..." genoemd, heet
+> in deze Unity-versie **"Export Assets..."**) staat alleen in het rechtermuisknop-menu van het
+> **Project**-paneel (op een bestand), niet in het **Hierarchy**-paneel (op een object in de
+> scene). Je root-object is nog geen eigen bestand, dus je maakt er eerst een prefab van
+> (stap 1-2 hieronder) voor je kan exporteren.
+
+1. Als je root-GameObject (`ImmersiveRoom_SLIX` of hoe je 'm hernoemd hebt) in de Hierarchy
+   **blauw** wordt weergegeven en binnen een ander prefab genest zit (bv. onder "Level"), moet
+   je dat eerst loskoppelen: rechtermuisknop op de **root van die prefab-instance** (bv.
+   "Level", niet je eigen object) → **Prefab → Unpack**. Zonder dit geeft Unity de foutmelding
+   "Cannot restructure Prefab instance" bij de volgende stap.
+2. Sleep je root-GameObject vanuit het **Hierarchy**-paneel naar een map in het
+   **Project**-paneel, bv. `Assets/StudentContent/` (maak die map eerst aan als die er nog niet
+   is). Hiermee maak je er een `.prefab`-bestand van; het object in je scene wordt nu blauw
+   (= gekoppeld aan die prefab) en je kan er gewoon in blijven werken.
+3. Klik in het **Project**-paneel (niet de Hierarchy!) op dat nieuwe prefab-bestand.
+4. Rechtermuisknop erop → **Export Assets...**
+5. Laat het vinkje bij **"Include Dependencies"** aan staan — zo komen je modellen, textures en
    audio automatisch mee.
-4. Klik **Export...**, en sla het bestand op als `Export/Content_<jouw-naam>.unitypackage`
+6. Klik **Export...**, en sla het bestand op als `Export/Content_<jouw-naam>.unitypackage`
    (maak in het bestandsvenster eerst de map `Export` aan als die er nog niet is, via
    "Nieuwe map").
-5. Ga terug naar VSCode, herhaal stap 5 en 6 hierboven (committen + pushen) zodat ook dit
-   bestand meegaat.
+7. Ga terug naar VSCode, herhaal stap 5 en 6 uit hoofdstuk 5/6 hierboven (committen + pushen)
+   zodat ook dit bestand meegaat.
