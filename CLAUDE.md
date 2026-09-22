@@ -319,40 +319,6 @@ heeft zijn eigen eenmalige lokale setup nodig, ook al zijn de projectbestanden g
     **niet** gebruikt bij het oplossen van déze crash — een patch-build zou de mogelijk
     corrupte intermediate build-artifacts hergebruiken i.p.v. echt schoon herbouwen.
 
-17. **Nieuw, fundamenteel probleem geïdentificeerd (2026-09-19): fysieke/virtuele positie van
-    spelers matcht niet, plus zorgen over drift.** Multiplayer over LAN werkt nu functioneel
-    (bevestigd met 2 headsets), maar er is **geen enkele koppeling tussen waar een speler
-    fysiek in het klaslokaal staat en waar die speler virtueel geplaatst wordt** — elke headset
-    bouwt zijn eigen onafhankelijke trackingruimte/Guardian op, los van de andere. De virtuele
-    spawnpositie (`FirstSpawnPoint` + spawn-lijn, zie "Spawnsysteem" hierboven) bepaalt alleen
-    de plek in de gedeelde virtuele scene, niet de relatie tot de echte kamer. Dit is dezelfde
-    afwezigheid van co-locatie die al eerder genoemd stond ("geen marker-based of anchor-based
-    co-locatiesysteem", zie "LAN-specifieke aanpassingen" hierboven — de uitgeschakelde Meta
-    `ColocationDiscoveryFeature`-toggle). Gebruiker vreest bovendien **drift**: zelfs een
-    eenmalige uitlijning tussen fysiek en virtueel kan in de loop van een sessie verschuiven
-    door onnauwkeurigheden in de inside-out tracking.
-    **Voorgestelde handzame oplossing (nog niet geïmplementeerd, besproken 2026-09-19):**
-    - Fysieke vloermarkeringen (tape/stickers) op dezelfde relatieve posities als de virtuele
-      spawnpunten (dus volgens `m_SpawnLineDirection` × `m_SpawnSpacing` = 0,8m-lijn vanaf
-      `FirstSpawnPoint`, inclusief kijkrichting).
-    - Een **"recenter-to-mark"-actie** (knop) die elke speler bij het opstarten uitvoert terwijl
-      die op zijn/haar fysieke markering staat: berekent het verschil tussen de huidige
-      (fysieke) camera-pose en de bedoelde virtuele spawn-transform, en verschuift/roteert de
-      hele `XR Origin` met dat verschil zodat fysiek en virtueel samenvallen. Puur lokale
-      transform-wiskunde, geen netwerk/cloud/marker-hardware nodig — past bij de bestaande
-      `SessionType.LocalOnly`-filosofie van dit project.
-    - Dezelfde knop **ook mid-sessie beschikbaar** als anti-drift-vangnet: speler gaat terug
-      naar zijn vloermarkering en drukt nogmaals om zichzelf opnieuw uit te lijnen. Lost drift
-      niet structureel op, maar geeft een snelle handmatige reset zonder technische kennis.
-    - **Zwaardere, "echte" oplossing voor later (bewust niet als eerste stap gekozen):** Meta's
-      Shared Spatial Anchors/Colocation-APIs zouden dit fundamenteel kunnen oplossen via
-      camera-gebaseerde gedeelde referentiepunten, maar zijn een aanzienlijk grotere
-      implementatie-inspanning en kunnen alsnog een Meta-account/cloud-afhankelijkheid
-      vereisen — dat gaat in tegen de bewuste "geen cloud nodig"-aanpak van dit project.
-    **Nog te doen:** de recenter-to-mark-actie implementeren (waarschijnlijk in
-    `XRINetworkPlayer.cs`, in de buurt van de bestaande spawn/Floor-tracking-logica) en fysiek
-    testen met meerdere headsets.
-
 ## Build performance (Android/Quest builds duren ~20 min)
 
 Onderzocht op 2026-09-16 n.a.v. trage builds. Kernpunten:
