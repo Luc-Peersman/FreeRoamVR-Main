@@ -67,5 +67,5 @@
         "*.sln": "*.csproj",
         "*.slnx": "*.csproj"
     },
-    "dotnet.defaultSolution": "FreeRoamVR.slnx"
+    "dotnet.defaultSolution": "FreeRoamVR-Main.slnx"
 }
